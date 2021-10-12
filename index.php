@@ -1,14 +1,30 @@
 <?php
 require 'vendor/autoload.php';
 
+session_start();
+
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'TasksController@index');
   $r->addRoute('GET', '/tasks', 'TasksController@index');
     $r->addRoute('GET', '/tasks/create', 'TasksController@create');
     $r->addRoute('POST', '/tasks', 'TasksController@store');
     $r->addRoute('POST', '/tasks/{id}', 'TasksController@delete');
+    $r->addRoute('GET', '/tasks/{id}', 'TasksController@show');
 
-    $r->addRoute('GET', '/users', 'registration/index@session_start()');
+
+$r->addRoute('GET','/users','UsersController@index');
+
+    $r->addRoute('GET','/register','AuthController@showregisterForm');
+    $r->addRoute('POST','/register','AuthController@register');
+
+
+    $r->addRoute('GET','/login','AuthController@showLoginForm');
+    $r->addRoute('POST','/login','AuthController@login');
+
+    $r->addRoute('POST','/logout','AuthController@logout');
+
+
+
 });
 
 function base_path():string

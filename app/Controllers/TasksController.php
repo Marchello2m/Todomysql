@@ -23,6 +23,8 @@ class TasksController
     {
         $tasks = $this->tasksRepository->getAll();
 
+
+
         require_once 'app/Views/tasks/index.template.php';
     }
     public function create()
@@ -48,7 +50,7 @@ class TasksController
     public function delete(array $vars)
     {
       $id =$vars['id'] ?? null;
-       if ($id == null) header('Location:/');
+       if ($id == null) header('Location:/tasks');
 
                $task = $this->tasksRepository->getOne($id);
 
@@ -56,7 +58,7 @@ class TasksController
               {
                  $this->tasksRepository->delete($task);
              }
-        header('Location:/');
+        header('Location:/tasks');
 
     }
 

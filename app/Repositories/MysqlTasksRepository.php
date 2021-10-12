@@ -15,8 +15,8 @@ class MysqlTasksRepository implements TasksRepository
     {
         $host ='127.0.0.1';
         $db ='todo';
-        $user=''; //mans logins
-        $pass='';//parole
+        $user='Marchello2m'; //mans logins
+        $pass='fredis007';//parole
 
         $dsn ="mysql:host=$host;dbname=$db;charset=UTF8";
         try {

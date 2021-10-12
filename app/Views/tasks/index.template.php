@@ -1,6 +1,5 @@
 <?php  require_once 'app/Views/partials/header.template.php';
 ?>
-<body>
 
 <h1>Tasks</h1>(<a href="/tasks/create">Create</a>)
 

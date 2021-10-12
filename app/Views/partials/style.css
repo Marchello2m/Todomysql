@@ -92,13 +92,14 @@ ul li.checked::before {
 
 /* Style the input */
 input {
-    margin: 0;
-    border: none;
-    border-radius: 0;
+    margin: 2px;
+    border: 2px;
+    border-radius: 2px;
     width: 75%;
     padding: 10px;
-    float: left;
+    float: right;
     font-size: 16px;
+    background-color:wheat;
 }
 
 /* Style the "Add" button */
@@ -117,4 +118,7 @@ input {
 
 .addBtn:hover {
     background-color: #bbb;
+}
+.label{
+    text-align: center;
 }
