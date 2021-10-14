@@ -18,7 +18,7 @@ class AuthController
 
     public function showRegisterForm()
     {
-          require_once 'app/Views/register.template.php';
+          require_once 'app/Views/register.twig';
     }
 
     public function register()
@@ -36,7 +36,7 @@ class AuthController
     }
     public function showLoginForm()
     {
-        require_once 'app/Views/login.template.php';
+        require_once 'app/Views/login.twig';
     }
     public function login()
     {
@@ -46,6 +46,7 @@ class AuthController
       {
           $_SESSION['authId']=$user->getId();
           header('Location: /tasks');
+
           exit;
       }
           header('Location: /login');

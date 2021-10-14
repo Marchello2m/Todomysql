@@ -1,7 +1,15 @@
 <?php
+
+
+use App\View;
+use Twig\Environment;
+use Twig\Extra\Markdown\MarkdownExtension;
+use Twig\Loader\FilesystemLoader;
+
 require 'vendor/autoload.php';
 
 session_start();
+
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'TasksController@index');
@@ -44,6 +52,13 @@ if (false !== $pos = strpos($uri, '?')) {
 $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+
+$loader = new FilesystemLoader(base_path().'/app/Views');
+$templateEngine = new Environment($loader, []);
+$templateEngine->addExtension(new MarkdownExtension());
+
+
+
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         // ... 404 Not Found
@@ -55,9 +70,18 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
+
        [$controller,$method]=explode('@',$handler);
        $controller = 'App\Controllers\\'.$controller;
        $controller =new $controller;
-       $controller->$method($vars);
+      $response= $controller->$method($vars);
+
+      if($response instanceof View)
+      {
+         echo $templateEngine->render(
+              $response->getTemplate(),
+              $response->getArgs() );
+
+      }
         break;
 }

@@ -6,30 +6,40 @@ use App\Models\Task;
 use App\Repositories\CsvTasksRepository;
 use App\Repositories\MysqlTasksRepository;
 use App\Repositories\TasksRepository;
+use App\View;
 use Ramsey\Uuid\Uuid;
-
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 
 class TasksController
 {
+
+    private Environment  $twig;
     private TasksRepository $tasksRepository;
     public function __construct()
     {
-        $this->tasksRepository = new MysqlTasksRepository();
+       $this->tasksRepository = new MysqlTasksRepository();
+
+
+
     }
 
 
-    public function index()
+    public function index():View
     {
         $tasks = $this->tasksRepository->getAll();
 
+        return new View('tasks/index.twig',[
+            'tasks'=> $tasks
+        ]);
 
 
-        require_once 'app/Views/tasks/index.template.php';
+
     }
     public function create()
     {
-        require_once 'app/Views/tasks/create.template.php';
+        require_once 'app/Views/tasks/create.twig';
     }
 
     public function store()

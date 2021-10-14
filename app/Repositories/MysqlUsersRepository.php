@@ -16,8 +16,8 @@ class MysqlUsersRepository implements UsersRepository
     {
         $host ='127.0.0.1';
         $db ='todo';
-        $user='Marchello2m'; //mans logins
-        $pass='fredis007';//parole
+        $user=''; //mans logins
+        $pass='';//parole
 
         $dsn ="mysql:host=$host;dbname=$db;charset=UTF8";
         try {
